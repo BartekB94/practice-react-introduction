@@ -1,27 +1,22 @@
 import React from "react";
+import MenuItem from '../03/components/MenuItem'
 import PropTypes from 'prop-types'
 
 class Menu extends React.Component {
     render() {
+        const list = this.props.items.map(item => {
+            return <MenuItem text={item.text} url={item.url}/>
+        })
         return (
             <ul>
-                {this.props.items.map((item, index) => (
-                    <li key={index}>
-                        <a href={item.url}>{item.text}</a>
-                    </li>
-                ))}
+                {list}
             </ul>
         );
     }
 }
 
 Menu.propTypes = {
-    items: PropTypes.arrayOf(
-        PropTypes.shape({
-            text: PropTypes.string.isRequired,
-            url: PropTypes.string.isRequired
-        })
-    ).isRequired
+    items: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 export default Menu
